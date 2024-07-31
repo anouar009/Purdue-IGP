@@ -1,0 +1,27 @@
+Set up a CI/CD pipeline to execute the jobs created and include a step to check out the source code
+
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/anouar009/Purdue-IGP.git'
+            }
+        }
+        stage('Compile') {
+            steps {
+                build job: 'Compile_Job_Name'
+            }
+        }
+        stage('Test') {
+            steps {
+                build job: 'Test_Job_Name'
+            }
+        }
+        stage('Package') {
+            steps {
+                build job: 'Package_Job_Name'
+            }
+        }
+    }
+}
