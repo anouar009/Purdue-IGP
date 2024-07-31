@@ -1,30 +1,31 @@
 Set up a CI/CD pipeline to execute the jobs created and include a step to check out the source code
-
 pipeline {
     agent any
+
+    tools {
+        maven 'Maven 3.6.3' // The name you provided in the Maven installation configuration
+    }
+
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/anouar009/Purdue-IGP.git'
-            }
-        }
         stage('Compile') {
             steps {
-                build job: 'Compile_Job_Name'
+                git 'https://github.com/anouar009/Purdue-IGP.git'
+                sh 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
-                build job: 'Test_Job_Name'
+                sh 'mvn test'
             }
         }
         stage('Package') {
             steps {
-                build job: 'Package_Job_Name'
+                sh 'mvn package'
             }
         }
     }
 }
+
 
 -------------
 3. Write a Dockerfile and Integrate with Jenkins
