@@ -1,0 +1,2 @@
+from centos:7
+RUN yum install tomcat 
