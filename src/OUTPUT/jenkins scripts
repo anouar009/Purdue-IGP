@@ -25,3 +25,112 @@ pipeline {
         }
     }
 }
+
+-------------
+3. Write a Dockerfile and Integrate with Jenkins
+Write a Dockerfile to create an image and container on the Docker host:
+-------------
+Create a Dockerfile in your project directory:
+Dockerfile
+Copier le code
+FROM tomcat:9.0
+COPY target/<your_app>.war /usr/local/tomcat/webapps/
+
+-------------
+Enhance the package job to create a Docker image:
+
+Add a post-build action to execute a shell script:
+bash
+Copier le code
+docker build -t <your_dockerhub_username>/<your_image_name>:latest .
+docker login -u <your_dockerhub_username> -p <your_dockerhub_password>
+docker push <your_dockerhub_username>/<your_image_name>:latest
+-------------
+Integrate Docker host with Jenkins:
+
+Install Docker plugin in Jenkins.
+Configure Docker in Jenkins Manage Plugins.
+Create a CI/CD job in Jenkins to build and deploy on a container:
+
+Add build steps for Docker build and push.
+4. Integrate Docker with Ansible and Deploy Using Playbook
+Write an Ansible playbook to create an image and container:
+
+Create an Ansible playbook deploy.yml:
+yaml
+Copier le code
+- hosts: localhost
+  tasks:
+    - name: Pull Docker image
+      docker_image:
+        name: <your_dockerhub_username>/<your_image_name>
+        source: pull
+
+    - name: Run Docker container
+      docker_container:
+        name: <your_container_name>
+        image: <your_dockerhub_username>/<your_image_name>
+        state: started
+        ports:
+          - "8080:8080"
+Integrate Ansible with Jenkins:
+
+Install Ansible plugin in Jenkins.
+Configure Ansible in Jenkins Manage Plugins.
+Create a Jenkins job to deploy using Ansible playbook:
+
+Add a build step to execute Ansible playbook:
+bash
+Copier le code
+ansible-playbook deploy.yml
+5. Deploy Artifacts to Kubernetes and Monitor Using Prometheus
+Write Kubernetes manifest files (pods, services, deployments):
+
+Create a deployment.yml:
+yaml
+Copier le code
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <your_deployment_name>
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: <your_app_name>
+  template:
+    metadata:
+      labels:
+        app: <your_app_name>
+    spec:
+      containers:
+      - name: <your_container_name>
+        image: <your_dockerhub_username>/<your_image_name>:latest
+        ports:
+        - containerPort: 8080
+Integrate Kubernetes with Ansible:
+
+Create an Ansible playbook k8s_deploy.yml:
+yaml
+Copier le code
+- hosts: localhost
+  tasks:
+    - name: Apply Kubernetes manifests
+      kubernetes:
+        src: deployment.yml
+Create a Jenkins job to deploy Kubernetes using Ansible:
+
+Add a build step to execute Ansible playbook:
+bash
+Copier le code
+ansible-playbook k8s_deploy.yml
+Set up Prometheus and monitor resources:
+
+Install Prometheus and node exporter.
+Configure Prometheus to monitor the Kubernetes cluster.
+Add Prometheus job configuration in prometheus.yml:
+yaml
+Copier le code
+- job_name: 'kubernetes-nodes'
+  kubernetes_sd_configs:
+  - role: node
