@@ -39,3 +39,8 @@ sudo docker --version
 sudo usermod -aG docker $USER
 Log out and log back in so that your group membership is re-evaluated.
 -------------------------------------------------------------------------------
+
+
+
+
+$ sudo cp dockerfile /var/lib/jenkins/workspace/Purdue-HostApp-Pipeline/Dockerfile
