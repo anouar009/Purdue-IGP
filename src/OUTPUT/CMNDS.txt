@@ -44,3 +44,73 @@ Log out and log back in so that your group membership is re-evaluated.
 
 
 $ sudo cp dockerfile /var/lib/jenkins/workspace/Purdue-HostApp-Pipeline/Dockerfile
+---------------------------------------------
+┌──(anouar㉿edureka)-[~/Purdue-igp]
+└─$ history
+    1  pwd
+    2  clear
+    3  jenkins --version
+    4  maven --version
+    5  clear
+    6  java --version
+    7  clear
+    8  docker --version
+    9  git config --global user.email "anouar.mechti@gmail.com"
+   10  pwd
+   11  docker --version
+   12  git config pull.rebase false
+   13  git config pull.rebase true
+   14  git config pull.ff only
+   15  sudo mkdir /var/lib/jenkins/shared
+   16  pwd
+   17  ls
+   18  cd src/
+   19  ls
+   20  cd OUTPUT/
+   21  ls
+   22  cp dockerfile /var/lib/jenkins/workspace/Purdue-HostApp-Pipeline/Dockerfile
+   23  sudo cp dockerfile /var/lib/jenkins/workspace/Purdue-HostApp-Pipeline/Dockerfile
+   24  CCpwd
+   25  clear
+   26  pwd
+   27  ls
+   28  cd ..
+   29  ls
+   30  cd ..
+   31  ls
+   32  cd docker/
+   33  docker
+   34  docker build -t abc_tech
+   35  docker.build('your-app-name', '.')
+   36  dockerbui
+   37  docker build --help 
+   38  pw
+   39  pwd
+   40  ls
+   41  docker build -t abcApp:v1 .
+   42  docker build -t abcApp:v1
+   43  docker build -t abc-app:v11
+   44  docker build -t abc-app:v11 .
+   45  sudo docker build -t abc-app:v11 .
+   46  cd /var/lib/jenkins/
+   47  ls
+   48  cd workspace/
+   49  ls
+   50  cd Purdue-Package-job
+   51  ls
+   52  cd target/
+   53  pwd
+   54  cd /home/
+   55  ls
+   56  cd anouar/
+   57  ls
+   58  cd Purdue-igp/
+   59  ls
+   60  cd docker/
+   61  ls
+   62  sudo docker build -t abc-app:v1 .
+   63  dosudo usermod -aG docker $USER
+   64  sudo usermod -aG docker $USER
+   65  docker ps
+   66  sudo apt install spice-vdagent 
+   67  history
