@@ -4,14 +4,11 @@ FROM tomcat:9-jdk11
 # Remove default webapps to avoid conflicts
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Build argument for WAR file location
-ARG WAR_FILE
-
 # Copy WAR file into the Tomcat webapps directory
-COPY ${WAR_FILE} /usr/local/tomcat/webapps/
+COPY abc_tech.war /usr/local/tomcat/webapps/
 
-# Expose Tomcat port
-EXPOSE 8080
+# Expose Tomcat port (changed to 8082)
+EXPOSE 8082
 
 # Start Tomcat
 CMD ["catalina.sh", "run"]
