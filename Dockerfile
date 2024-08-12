@@ -5,7 +5,7 @@ FROM tomcat:9-jdk11
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy WAR file into the Tomcat webapps directory
-COPY abc_tech.war:$BUILD_NUMBER /usr/local/tomcat/webapps/
+COPY abc_tech.war /usr/local/tomcat/webapps/
 
 # Expose Tomcat port (changed to 8082)
 EXPOSE 8081
