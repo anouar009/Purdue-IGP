@@ -1,0 +1,29 @@
+- hosts: all
+  become: false
+  tasks:
+    - name: Build Docker image for XYZ Tech
+      community.docker.docker_image:
+        name: anouar009/xyz_tech
+        tag: latest
+        path: /path/to/your/dockerfile
+        state: present
+
+    - name: Log in to Docker Hub
+      community.docker.docker_login:
+        username: "{{ docker_hub_username }}"
+        password: "{{ docker_hub_password }}"
+
+    - name: Push Docker image to Docker Hub
+      community.docker.docker_image:
+        name: anouar009/xyz_tech
+        tag: latest
+        push: true
+
+    - name: Run XYZ Tech on container
+      community.docker.docker_container:
+        name: xyz_tech
+        image: anouar009/xyz_tech:latest
+        state: started
+        auto_remove: true
+        ports:
+          - "8080:8080"

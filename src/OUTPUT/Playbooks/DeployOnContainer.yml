@@ -1,0 +1,11 @@
+- hosts: all
+  become: false
+  tasks:
+    - name: Run XYZ Tech on container
+      docker_container:
+        name: xyz_tech
+        image: anouar009/xyz_tech:latest
+        state: started
+        auto_remove: true
+        ports:
+          - "8080:8080"
