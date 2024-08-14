@@ -41,7 +41,7 @@ pipeline {
             steps {
                 // Assuming Ansible is installed on the Jenkins server or the agent
                 sh 'pwd'
-                sh 'ansible-playbook $WORKSPACE/Purdue-IGP/SOLUTION/Ansible-Playbooks/DeployOnContainer.yml -i localhost, -u anouar -c local'
+                sh 'ansible-playbook DeployOnContainer.yml -i localhost, -u anouar -c local'
             }
         }
     }
