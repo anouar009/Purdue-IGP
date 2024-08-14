@@ -22,7 +22,6 @@ pipeline {
         stage('Copy WAR File') {
             steps {
                 sh 'cp $WORKSPACE/target/XYZtechnologies-1.0.war xyz_tech.war'
-                
             }
         }
 
@@ -41,7 +40,8 @@ pipeline {
         stage('Deploy with Ansible') {
             steps {
                 // Assuming Ansible is installed on the Jenkins server or the agent
-                sh 'ansible-playbook ~/Purdue-IGP/SOLUTION/Ansible Playbooks/PurdueOnContainer.yml -i localhost, -u anouar -c local'
+                sh 'pwd'
+                sh 'ansible-playbook $WORKSPACE/Purdue-IGP/SOLUTION/Ansible-Playbooks/DeployOnContainer.yml -i localhost, -u anouar -c local'
             }
         }
     }
