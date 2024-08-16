@@ -1,0 +1,65 @@
+pipeline {
+    agent any
+    stages {
+        stage('Code Checkout') {
+            steps {
+                git url: 'https://github.com/anouar009/purdue-igp.git', branch: 'main'
+            }
+        }
+
+        stage('Code Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+
+        stage('Copy WAR File') {
+            steps {
+                sh 'cp $WORKSPACE/target/XYZtechnologies-1.0.war xyz_tech.war'
+            }
+        }
+
+        stage('Build and Push Docker Image') {
+            steps {
+                withDockerRegistry([credentialsId: "123", url: ""]) {
+                    script {
+                        sh 'docker build -t xyz_tech:latest .'
+                        sh 'docker tag xyz_tech:latest anouar009/xyz_tech:latest'
+                        sh 'docker push anouar009/xyz_tech:latest'
+                    }
+                }
+            }
+        }
+
+        stage('Deploy on Kubernetes with Ansible') {
+            steps {
+                script {
+                    // Ensure Minikube is running
+                    sh 'minikube delete'
+                    sh 'minikube status || minikube start'
+
+                    // Run the Ansible playbook to deploy on Kubernetes
+                    sh 'source /home/anouar/Purdue-IGP/.venv/bin/activate && ansible-playbook DeployOnK8s.yml -i localhost, -u anouar -c local'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning up...'
+            sh 'docker system prune -f'
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}

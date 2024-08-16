@@ -5,7 +5,6 @@
       kubernetes.core.k8s:
         state: present
         definition: "{{ lookup('file', 'deployment.yml') }}"
-    
     - name: Apply Kubernetes Service
       kubernetes.core.k8s:
         state: present
