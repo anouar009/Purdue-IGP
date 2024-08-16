@@ -114,3 +114,4 @@ $ sudo cp dockerfile /var/lib/jenkins/workspace/Purdue-HostApp-Pipeline/Dockerfi
    65  docker ps
    66  sudo apt install spice-vdagent 
    67  history
+   sudo apt-get install -y python3-kubernetes

@@ -1,5 +1,7 @@
 - name: Deploy XYZ Tech application on Kubernetes
   hosts: localhost
+  vars:
+    k8s_auth_kubeconfig: /var/lib/jenkins/.minikube/config 
   tasks:
     - name: Apply Kubernetes Deployment
       kubernetes.core.k8s:

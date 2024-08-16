@@ -1,0 +1,39 @@
+Steps to Resolve:
+Deactivate the Virtual Environment:
+
+First, deactivate the virtual environment:
+
+
+deactivate
+This command will reset your environment to use the system-wide Python and pip installations.
+
+Check the System-Wide Python and Pip:
+
+After deactivating the virtual environment, verify that python3 and pip3 point to the system-wide versions:
+
+
+which python3
+which pip3
+The output should now point to /usr/bin/python3 and /usr/bin/pip3, respectively.
+
+Reinstall the Kubernetes Package Globally:
+
+Now, install the kubernetes package globally using the system-wide pip3:
+
+
+sudo pip3 install kubernetes
+Verify the Installation:
+
+Check if Python can now successfully import the kubernetes module:
+
+
+python3 -c "import kubernetes"
+If Problems Persist:
+If python3 and pip3 continue to point to the virtual environment after running deactivate, you might need to remove the virtual environment or adjust your shell’s configuration files (e.g., .bashrc or .bash_profile) to stop automatically activating the virtual environment.
+
+Removing the Virtual Environment (Optional):
+If you no longer need the virtual environment and want to remove it:
+
+
+rm -rf /home/anouar/Purdue-IGP/.venv
+This command will delete the virtual environment, ensuring that your shell uses the system-wide Python by default.
