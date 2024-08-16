@@ -36,7 +36,11 @@ pipeline {
                 }
             }
         }
-
+stage('Check Kubernetes Access') {
+    steps {
+        sh 'kubectl --kubeconfig=/var/lib/jenkins/.minikube/config get pods'
+    }
+}
         stage('Deploy on Kubernetes with Ansible') {
             steps {
                 script {
